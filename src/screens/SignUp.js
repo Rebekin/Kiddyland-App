@@ -67,7 +67,7 @@ export default function SignUp({ navigation }) {
             formData.append('confirmarClave', confirmarClave);
             formData.append('nacimientoCliente', nacimientoCliente);
 
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=signUp`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`, {
                 method: 'POST',
                 body: formData
             });

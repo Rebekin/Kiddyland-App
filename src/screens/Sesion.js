@@ -57,8 +57,8 @@ export default function Sesion({ navigation }) {
 
         try {
             const formData = new FormData();
-            formData.append('correoCliente', correo);
-            formData.append('clienteCliente', clave);
+            formData.append('correo', correo);
+            formData.append('clave', clave);
 
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logIn`, {
                 method: 'POST',
@@ -104,7 +104,7 @@ export default function Sesion({ navigation }) {
         
         catch (error) {
             console.error(error, "Error desde Catch");
-            Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
+            Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
         }
     };
 
