@@ -6,7 +6,7 @@ export default function Input({placeHolder, setValor, setTextChange}) {
       style={styles.Input}
       placeholder={placeHolder}
       value={setValor}
-      placeholderTextColor={'#FFF'}
+      placeholderTextColor={'#60BFB2'}
       onChangeText={setTextChange}
     />
   );
@@ -14,13 +14,14 @@ export default function Input({placeHolder, setValor, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'white',
-    color: "#fff", 
-    fontWeight:'800',
-    width: 250,
+    backgroundColor: 'white',
+    color: "#60BFB2",
+    fontWeight: '800',
+    width: 280,
     borderBottomWidth: 1,
     borderBottomColor: '#FFF',
-    padding: 5,
-    marginVertical:10
+    padding: 10,
+    marginVertical: 15,
+    borderRadius: 50,
   },
 });

@@ -174,13 +174,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#000000',
+        backgroundColor: '#8FC2BB',
     },
     scrollViewContent: {
         flexGrow: 1, // Asegura que el contenido se expanda para ajustarse al ScrollView
     },
     logo: {
-        width: 300,
+        marginTop: 50,
+        width: 150,
         height: 150,
         alignSelf: 'center',
     },

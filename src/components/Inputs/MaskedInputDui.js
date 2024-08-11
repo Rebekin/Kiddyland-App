@@ -7,7 +7,7 @@ export default function MaskedInputDui({ dui, setDui, setEditable }) {
         <MaskedTextInput
             mask="99999999-9"
             placeholder='Dui'
-            placeholderTextColor="#fff"
+            placeholderTextColor="#60BFB2"
             onChangeText={(text) => {
                 setDui(text);
             }}
@@ -22,12 +22,13 @@ export default function MaskedInputDui({ dui, setDui, setEditable }) {
 const styles = StyleSheet.create({
     Input: {
         backgroundColor: 'white',
-        color: "#fff",
+        color: "#60BFB2",
         fontWeight: '800',
-        width: 250,
+        width: 280,
         borderBottomWidth: 1,
         borderBottomColor: '#FFF',
-        padding: 5,
-        marginVertical: 10
+        padding: 10,
+        marginVertical: 15,
+        borderRadius: 50,
     },
 });
