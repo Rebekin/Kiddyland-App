@@ -5,7 +5,6 @@ import * as Constantes from '../utils/constantes'
 //Import de componentes
 import Input from '../components/Inputs/Input'
 import InputPass from '../components/Inputs/MaskedInputPassword'
-import ComboBox from '../components/Inputs/InputBox'
 import Boton from '../components/Buttons/Button';
 import Boton2 from '../components/Buttons/Button2';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
