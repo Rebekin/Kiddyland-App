@@ -15,7 +15,7 @@ export default Boton;
 const styles = StyleSheet.create({
     button: {
         textAlign: 'end',
-        color: 'white',
+        color: '#60BFB2',
         padding: 10,
         borderRadius: 5,
         marginVertical: 5
