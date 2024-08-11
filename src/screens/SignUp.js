@@ -39,7 +39,7 @@ export default function SignUp({ navigation }) {
         try {
             // Validar los campos
             if (!nombre.trim() || !apellido.trim() || !correo.trim() || !dirreccion.trim() ||
-                !dui.trim() || !telefono.trim() || !clave.trim() || !nacimientoCliente.trim()) {
+                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() ||!nacimientoCliente.trim()) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
             } 
@@ -137,7 +137,7 @@ export default function SignUp({ navigation }) {
                     setTextChange={setClave}
                     secureTextEntry
                 />
-                  <InputPass
+                <InputPass
                     placeHolder="Confirmar contraseña:"
                     setValor={confirmarClave}
                     setTextChange={setconfirmarClave}
