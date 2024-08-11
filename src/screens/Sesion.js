@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Alert } from 'react-native';
+import { StyleSheet, View, Image, Alert, Text } from 'react-native';
 import InputEmail from '../components/Inputs/InputEmail'
 import InputPass from '../components/Inputs/MaskedInputPassword'
 import Boton from '../components/Buttons/Button';
@@ -115,6 +115,9 @@ export default function Sesion({ navigation }) {
 
     return (
         <View style={styles.container}>
+
+            <Text style={styles.text}>BIENVENIDO A KIDDYLAND</Text>
+            
             <Image
                 source={require('../../assets/logo.png')}
                 style={styles.logo}
@@ -154,12 +157,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#000000',
+        backgroundColor: '#8FC2BB',
     },
     logo: {
-        width: 400,
+        width: 300,
         height: 300,
         alignSelf: 'center',
-        marginBottom: 20,
+        marginBottom: 10,
     },
+    text:{
+        color: 'white',
+        marginTop: 80,
+        fontWeight:'800',
+        fontSize: 20,
+    }
 });

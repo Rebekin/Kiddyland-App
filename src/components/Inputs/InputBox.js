@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     inputContainer: {
-        backgroundColor: '#000000',
+        backgroundColor: 'white',
         width: 250,
         borderWidth: 1,
         borderColor: '#FFF',

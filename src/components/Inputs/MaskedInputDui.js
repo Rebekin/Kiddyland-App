@@ -21,7 +21,7 @@ export default function MaskedInputDui({ dui, setDui, setEditable }) {
 
 const styles = StyleSheet.create({
     Input: {
-        backgroundColor: '#000000',
+        backgroundColor: 'white',
         color: "#fff",
         fontWeight: '800',
         width: 250,

@@ -14,7 +14,7 @@ export default function Input({placeHolder, setValor, setTextChange}) {
 
 const styles = StyleSheet.create({
   Input: {
-    backgroundColor:'#000000',
+    backgroundColor:'white',
     color: "#fff", 
     fontWeight:'800',
     width: 250,
