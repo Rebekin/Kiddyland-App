@@ -40,7 +40,7 @@ const Carrito = ({ navigation }) => {
     // Función para obtener los detalles del carrito desde el servidor
     const getDetalleCarrito = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/pedido.php?action=readDetallePedido`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=readDetail`, {
                 method: 'GET',
             });
 

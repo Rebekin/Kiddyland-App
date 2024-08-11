@@ -22,9 +22,10 @@ export default function SignUp({ navigation }) {
     const [correo, setCorreo] = useState('');
     const [telefono, setTelefono] = useState('');
     const [dui, setDui] = useState('');
-    const [contraseña, setContraseña] = useState('');
-    const [confirmar, setConfirmar] = useState('');
-    const [genero, setGenero] = useState('Masculino');
+    const [clave, setClave] = useState('');
+    const [confirmarClave, setconfirmarClave] = useState('');
+    const [nacimientoCliente, setnacimientoCliente] = useState('');
+    const [dirreccion, setDireccion] = useState('');
 
     // Expresiones regulares para validar DUI y teléfono
     const duiRegex = /^\d{8}-\d$/;
@@ -37,8 +38,8 @@ export default function SignUp({ navigation }) {
         console.log("Entra al metodo")
         try {
             // Validar los campos
-            if (!nombre.trim() || !apellido.trim() || !correo.trim() || !genero.trim() ||
-                !dui.trim() || !telefono.trim() || !contraseña.trim() || !confirmar.trim()) {
+            if (!nombre.trim() || !apellido.trim() || !correo.trim() || !dirreccion.trim() ||
+                !dui.trim() || !telefono.trim() || !clave.trim() || !nacimientoCliente.trim()) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
             } 
@@ -59,13 +60,14 @@ export default function SignUp({ navigation }) {
             formData.append('nombreCliente', nombre);
             formData.append('apellidoCliente', apellido);
             formData.append('correoCliente', correo);
-            formData.append('generoCliente', genero);
+            formData.append('direccionCliente', dirreccion);
             formData.append('duiCliente', dui);
             formData.append('telefonoCliente', telefono);
-            formData.append('contraseñaCliente', contraseña);
-            formData.append('confirmarcontraseñaCliente', confirmar);
+            formData.append('claveCliente', clave);
+            formData.append('confirmarClave', confirmarClave);
+            formData.append('nacimientoCliente', nacimientoCliente);
 
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=signUp`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=signUp`, {
                 method: 'POST',
                 body: formData
             });
@@ -131,20 +133,25 @@ export default function SignUp({ navigation }) {
                 />
                 <InputPass
                     placeHolder="Contraseña:"
-                    setValor={contraseña}
-                    setTextChange={setContraseña}
+                    setValor={clave}
+                    setTextChange={setClave}
+                    secureTextEntry
+                />
+                  <InputPass
+                    placeHolder="Confirmar contraseña:"
+                    setValor={confirmarClave}
+                    setTextChange={setconfirmarClave}
                     secureTextEntry
                 />
                 <InputPass
-                    placeHolder="Confirmar Contraseña:"
-                    setValor={confirmar}
-                    setTextChange={setConfirmar}
-                    secureTextEntry
+                    placeHolder="Fecha de nacimiento:"
+                    setValor={setnacimientoCliente}
+                    setTextChange={setnacimientoCliente}
                 />
                 <ComboBox
-                    placeHolder='Género'
-                    setValor={setGenero}
-                    setTextChange={setGenero}
+                    placeHolder='Dirección'
+                    setValor={setDireccion}
+                    setTextChange={setDireccion}
                 />
                 <Boton2
                     mode="contained"

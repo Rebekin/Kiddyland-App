@@ -42,7 +42,7 @@ export default function UpdateUser({ navigation }) {
                 setGenero(data.name.genero_cliente);
                 setDui(data.name.dui_client);
                 setTelefono(data.name.telf_cliente);
-            } 
+            }
             
             else {
                 Alert.alert('Error', data.error);

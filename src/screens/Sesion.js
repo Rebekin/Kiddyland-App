@@ -26,7 +26,7 @@ export default function Sesion({ navigation }) {
 
     const validarSesion = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=getUser`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=getUser`, {
                 method: 'GET'
             });
 
@@ -57,10 +57,10 @@ export default function Sesion({ navigation }) {
 
         try {
             const formData = new FormData();
-            formData.append('correoClienteLogin', correo);
-            formData.append('contraseñaClienteLogin', clave);
+            formData.append('correoCliente', correo);
+            formData.append('clienteCliente', clave);
 
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=logIn`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=logIn`, {
                 method: 'POST',
                 body: formData
             });
@@ -87,7 +87,7 @@ export default function Sesion({ navigation }) {
 
     const cerrarSesion = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=logOut`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=logOut`, {
                 method: 'GET'
             });
 
