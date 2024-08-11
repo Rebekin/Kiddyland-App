@@ -39,7 +39,7 @@ export default function SignUp({ navigation }) {
         try {
             // Validar los campos
             if (!nombre.trim() || !apellido.trim() || !correo.trim() || !dirreccion.trim() ||
-                !dui.trim() || !telefono.trim() || !clave.trim() || !nacimientoCliente.trim()) {
+                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() ||!nacimientoCliente.trim()) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
             } 
@@ -67,7 +67,7 @@ export default function SignUp({ navigation }) {
             formData.append('confirmarClave', confirmarClave);
             formData.append('nacimientoCliente', nacimientoCliente);
 
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=signUp`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`, {
                 method: 'POST',
                 body: formData
             });
@@ -137,7 +137,7 @@ export default function SignUp({ navigation }) {
                     setTextChange={setClave}
                     secureTextEntry
                 />
-                  <InputPass
+                <InputPass
                     placeHolder="Confirmar contraseña:"
                     setValor={confirmarClave}
                     setTextChange={setconfirmarClave}
@@ -148,7 +148,7 @@ export default function SignUp({ navigation }) {
                     setValor={setnacimientoCliente}
                     setTextChange={setnacimientoCliente}
                 />
-                <ComboBox
+                <Input
                     placeHolder='Dirección'
                     setValor={setDireccion}
                     setTextChange={setDireccion}

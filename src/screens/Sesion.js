@@ -26,7 +26,7 @@ export default function Sesion({ navigation }) {
 
     const validarSesion = async () => {
         try {
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=getUser`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=getUser`, {
                 method: 'GET'
             });
 
@@ -57,10 +57,10 @@ export default function Sesion({ navigation }) {
 
         try {
             const formData = new FormData();
-            formData.append('correoCliente', correo);
-            formData.append('clienteCliente', clave);
+            formData.append('correo', correo);
+            formData.append('clave', clave);
 
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=logIn`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logIn`, {
                 method: 'POST',
                 body: formData
             });
@@ -87,7 +87,7 @@ export default function Sesion({ navigation }) {
 
     const cerrarSesion = async () => {
         try {
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=logOut`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logOut`, {
                 method: 'GET'
             });
 
@@ -104,7 +104,7 @@ export default function Sesion({ navigation }) {
         
         catch (error) {
             console.error(error, "Error desde Catch");
-            Alert.alert('Error', 'Ocurrió un error al iniciar sesión con bryancito');
+            Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
         }
     };
 
