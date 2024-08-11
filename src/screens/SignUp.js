@@ -148,7 +148,7 @@ export default function SignUp({ navigation }) {
                     setValor={setnacimientoCliente}
                     setTextChange={setnacimientoCliente}
                 />
-                <ComboBox
+                <Input
                     placeHolder='Dirección'
                     setValor={setDireccion}
                     setTextChange={setDireccion}
