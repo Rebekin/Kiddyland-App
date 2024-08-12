@@ -6,7 +6,7 @@ export default function MaskedInputDui({ dui, setDui, setEditable }) {
     return (
         <MaskedTextInput
             mask="99999999-9"
-            placeholder='Dui'
+            placeholder='Dui:'
             placeholderTextColor="#60BFB2"
             onChangeText={(text) => {
                 setDui(text);

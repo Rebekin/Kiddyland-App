@@ -117,7 +117,7 @@ export default function Sesion({ navigation }) {
         <View style={styles.container}>
 
             <Text style={styles.text}>BIENVENIDO A KIDDYLAND</Text>
-            
+            <Text style={styles.text2}>Toy feliz en mi mundo</Text>
             <Image
                 source={require('../../assets/logo.png')}
                 style={styles.logo}
@@ -144,7 +144,7 @@ export default function Sesion({ navigation }) {
                 accionBoton={cerrarSesion}
             />
             <Boton
-                textoBoton="¿No tienes una cuenta?"
+                textoBoton="¿No tienes una cuenta? crea una aquí"
                 accionBoton={handleNavigateToRegister}
             />
         </View>
@@ -170,5 +170,10 @@ const styles = StyleSheet.create({
         marginTop: 80,
         fontWeight:'800',
         fontSize: 20,
+    },
+    text2:{
+        color: 'white',
+        fontWeight:'500',
+        fontSize: 15,
     }
 });

@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, Alert, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Alert, Image, ScrollView, Text } from 'react-native';
 import { useState } from 'react';
 import * as Constantes from '../utils/constantes'
 //Import de componentes
@@ -100,17 +100,20 @@ export default function SignUp({ navigation }) {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
+            <Text style={styles.text}>
+            ¡Regístrate!
+            </Text>
                 <Image
                     source={require('../../assets/logo.png')}
                     style={styles.logo}
                 />
                 <Input
-                    placeHolder="Nombre(s):"
+                    placeHolder="Nombre:"
                     setValor={nombre}
                     setTextChange={setNombre}
                 />
                 <Input
-                    placeHolder="Apellido(s):"
+                    placeHolder="Apellido:"
                     setValor={apellido}
                     setTextChange={setApellido}
                 />
@@ -149,7 +152,7 @@ export default function SignUp({ navigation }) {
                     setDate={setnacimientoCliente}  // Pasar la función para actualizar el estado
                 />
                 <Input
-                    placeHolder='Dirección'
+                    placeHolder='Dirección:'
                     setValor={setDireccion}
                     setTextChange={setDireccion}
                 />
@@ -180,9 +183,17 @@ const styles = StyleSheet.create({
         flexGrow: 1, // Asegura que el contenido se expanda para ajustarse al ScrollView
     },
     logo: {
-        marginTop: 50,
+        marginTop: 10,
         width: 150,
         height: 150,
         alignSelf: 'center',
     },
+    text:{
+        color: 'black',
+        marginTop: 80,
+        marginBottom: 30,
+        fontWeight:'800',
+        fontSize: 20,
+    },
 });
+
