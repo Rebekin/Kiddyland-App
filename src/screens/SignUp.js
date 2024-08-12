@@ -10,6 +10,7 @@ import Boton2 from '../components/Buttons/Button2';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
+import DatePicker from '../components/Inputs/DatePicker';
 
 export default function SignUp({ navigation }) {
 
@@ -38,16 +39,16 @@ export default function SignUp({ navigation }) {
         try {
             // Validar los campos
             if (!nombre.trim() || !apellido.trim() || !correo.trim() || !dirreccion.trim() ||
-                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() ||!nacimientoCliente.trim()) {
+                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() || !nacimientoCliente.trim()) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
-            } 
-            
+            }
+
             else if (!duiRegex.test(dui)) {
                 Alert.alert("El DUI debe tener el formato correcto (########-#)");
                 return;
-            } 
-            
+            }
+
             else if (!telefonoRegex.test(telefono)) {
                 Alert.alert("El teléfono debe tener el formato correcto (####-####)");
                 return;
@@ -78,8 +79,8 @@ export default function SignUp({ navigation }) {
                 console.log("Entro al status")
                 Alert.alert('Datos Guardados correctamente');
                 navigation.navigate('Sesion');
-            } 
-            
+            }
+
             else {
                 console.log("Error status")
                 Alert.alert('Error', data.error);
@@ -142,10 +143,10 @@ export default function SignUp({ navigation }) {
                     setTextChange={setconfirmarClave}
                     secureTextEntry
                 />
-                <InputPass
-                    placeHolder="Fecha de nacimiento:"
-                    setValor={setnacimientoCliente}
-                    setTextChange={setnacimientoCliente}
+                <DatePicker
+                    placeholder="Fecha de nacimiento:"  // Ahora se usa como placeholder
+                    date={nacimientoCliente}
+                    setDate={setnacimientoCliente}
                 />
                 <Input
                     placeHolder='Dirección'
