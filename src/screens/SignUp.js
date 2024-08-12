@@ -137,10 +137,6 @@ export default function SignUp({ navigation }) {
                 <Input
                     placeHolder='Dirección'
                     setValor={direccion}
-=======
-                    placeHolder='Dirección:'
-                    setValor={setDireccion}
->>>>>>> 29c9c1b8c3f3588dfdd02e2bd618a41da7cc36b7
                     setTextChange={setDireccion}
                 />
                 <Boton2
