@@ -71,13 +71,13 @@ export default function SignUp({ navigation }) {
             formData.append('confirmarClave', confirmarClave);
             //console.log(nombre,apellido,correo,direccion,dui,nacimientoCliente,telefono,clave,confirmarClave);
 
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`,{
-                method: 'POST', body: formData
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`, {
+                method: 'POST',
+                body: formData,
             });
-            console.log(response);
 
             const data = await response.json();
-            
+            console.log(data);
             if (data.status) {
                 console.log("Entro al status");
                 Alert.alert('Datos Guardados correctamente');
