@@ -6,7 +6,7 @@ export default function MaskedInputTelefono({ telefono, setTelefono }) {
     return (
         <MaskedTextInput
             mask="9999-9999"
-            placeholder='Telefono'
+            placeholder='Teléfono:'
             placeholderTextColor="#60BFB2"
             onChangeText={(text) => {
                 setTelefono(text);

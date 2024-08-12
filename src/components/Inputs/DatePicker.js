@@ -13,7 +13,9 @@ const DatePicker = ({ placeholder, date, setDate }) => {
 
     return (
         <View style={styles.container}>
+            
             <TouchableOpacity onPress={() => setShow(true)}>
+                
                 <Text style={date ? styles.dateText : styles.placeholderText}>
                     {date ? date.toLocaleDateString() : placeholder}
                 </Text>
@@ -31,29 +33,28 @@ const DatePicker = ({ placeholder, date, setDate }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        marginVertical: 10,
-        width: '100%',
-    },
+
     dateText: {
-        fontSize: 16,
-        color: '#000',
-        paddingVertical: 10,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        textAlign: 'center',
+        backgroundColor: 'white',
+        color: "#60BFB2",
+        fontWeight: '800',
+        width: 280,
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFF',
+        padding: 15,
+        marginVertical: 15,
+        borderRadius: 50,
     },
     placeholderText: {
-        fontSize: 16,
-        color: '#999',  // Color gris claro para simular un placeholder
-        paddingVertical: 10,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        textAlign: 'center',
+        backgroundColor: 'white',
+        color: "#60BFB2",
+        fontWeight: '800',
+        width: 280,
+        borderBottomWidth: 1,
+        borderBottomColor: '#FFF',
+        padding: 15,
+        marginVertical: 15,
+        borderRadius: 50,
     },
 });
 
