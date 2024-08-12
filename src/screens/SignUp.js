@@ -145,8 +145,8 @@ export default function SignUp({ navigation }) {
                 />
                 <DatePicker
                     placeholder="Fecha de nacimiento:"  // Ahora se usa como placeholder
-                    date={nacimientoCliente}
-                    setDate={setnacimientoCliente}
+                    date={nacimientoCliente}  // Pasar la fecha actual
+                    setDate={setnacimientoCliente}  // Pasar la función para actualizar el estado
                 />
                 <Input
                     placeHolder='Dirección'

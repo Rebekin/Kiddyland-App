@@ -20,7 +20,7 @@ const DatePicker = ({ placeholder, date, setDate }) => {
             </TouchableOpacity>
             {show && (
                 <DateTimePicker
-                    value={date || new Date()}
+                    value={date || new Date()}  // Asegurando que haya un valor por defecto
                     mode="date"
                     display="default"
                     onChange={onChange}
