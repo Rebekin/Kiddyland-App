@@ -9,7 +9,7 @@ export default function ProductoCard({ ip, imagenProducto, nombreProducto, descr
         <View key={`${idProducto}-${idDetalleProducto}`} style={styles.card}>
             <View style={styles.imageContainer}>
                 <Image
-                    source={{ uri: `${ip}/P-Z/api/images/productos/${imagenProducto}` }}
+                    source={{ uri: `${ip}/Kiddyland/api/images/productos/${imagenProducto}` }}
                     style={styles.image}
                     resizeMode="contain" // Ajustar la imagen al contenedor
                 />

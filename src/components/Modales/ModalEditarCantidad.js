@@ -19,7 +19,7 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
             formData.append('idDetalle', idDetalle);
             formData.append('cantidadProducto', cantidadProductoCarrito);
 
-            const response = await fetch(`${ip}/P-Z/api/services/public/pedido.php?action=updateDetail`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=updateDetail`, {
                 method: 'POST',
                 body: formData
             });

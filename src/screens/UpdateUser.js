@@ -28,7 +28,7 @@ export default function UpdateUser({ navigation }) {
     // Funcion para llenar los inputs con los datos del usuario
     const fillData = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=getUser`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=getUser`, {
                 method: 'GET'
             });
 
@@ -90,7 +90,7 @@ export default function UpdateUser({ navigation }) {
             formData.append('generoClientePerfil', genero);
             formData.append('duiClientePerfil', dui)
             formData.append('telefonoClientePerfil', telefono);
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=editProfile`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=editProfile`, {
                 method: 'POST',
                 body: formData
             });

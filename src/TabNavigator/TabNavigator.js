@@ -4,9 +4,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Platform } from 'react-native';
 
 // Importa tus componentes de pantalla aquí
-//import Productos from '../screens/Productos';
-//import Home from '../screens/Home';
-//import Carrito from '../screens/Carrito';
+import Productos from '../screens/Productos';
+import Home from '../screens/Home';
+import Carrito from '../screens/Carrito';
 
 const Tab = createBottomTabNavigator();
 

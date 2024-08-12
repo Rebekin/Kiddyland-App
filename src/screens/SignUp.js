@@ -29,6 +29,15 @@ export default function SignUp({ navigation }) {
     const duiRegex = /^\d{8}-\d$/;
     const telefonoRegex = /^\d{4}-\d{4}$/;
 
+    // Función para formatear la fecha en YYYY-MM-DD
+    const formatDate = (date) => {
+        if (!date) return '';
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`; // Asegúrate de usar guiones (-) y no barras (/)
+    };
+
     const handleCreate = async () => {
         console.log("Entra al metodo");
         try {
@@ -56,28 +65,20 @@ export default function SignUp({ navigation }) {
             formData.append('correoCliente', correo);
             formData.append('direccionCliente', direccion);
             formData.append('duiCliente', dui);
-            formData.append('nacimientoCliente', nacimientoCliente);
+            formData.append('nacimientoCliente', nacimientoCliente ? formatDate(nacimientoCliente) : ''); 
             formData.append('telefonoCliente', telefono);
             formData.append('claveCliente', clave);
             formData.append('confirmarClave', confirmarClave);
-            console.log(nombre);
-            console.log(apellido);
-            console.log(correo);
-            console.log(direccion);
-            console.log(dui);
-            console.log(nacimientoCliente);
-            console.log(telefono);
-            console.log(clave);
-            console.log(confirmarClave);
-
+            //console.log(nombre,apellido,correo,direccion,dui,nacimientoCliente,telefono,clave,confirmarClave);
 
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`, {
                 method: 'POST',
-                body: formData
+                body: formData,
             });
             console.log("Pasa a la api");
 
             const data = await response.json();
+            console.log(data);
             if (data.status) {
                 console.log("Entro al status");
                 Alert.alert('Datos Guardados correctamente');
@@ -87,6 +88,7 @@ export default function SignUp({ navigation }) {
                 Alert.alert('Error', data.error);
             }
         } catch (error) {
+            console.error('Error en el fetch:', error); // Agrega esta línea para obtener más detalles del error
             Alert.alert('Ocurrió un error al intentar crear el usuario');
         }
     };
