@@ -75,7 +75,7 @@ export default function SignUp({ navigation }) {
                 method: 'POST',
                 body: formData
             });
-            console.log("Pasa la peticion");
+            console.log("Pasa a la api");
 
             const data = await response.json();
             if (data.status) {
