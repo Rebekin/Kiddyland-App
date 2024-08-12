@@ -208,7 +208,7 @@ export default function UpdateUser({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#60BFB2',
     },
     scrollViewStyle: {
         alignItems: 'center',
