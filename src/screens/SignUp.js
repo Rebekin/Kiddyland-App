@@ -1,5 +1,5 @@
 import { StyleSheet, View, Alert, Image, ScrollView } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as Constantes from '../utils/constantes';
 // Import de componentes
 import Input from '../components/Inputs/Input';
@@ -43,6 +43,9 @@ export default function SignUp({ navigation }) {
             } else if (!telefonoRegex.test(telefono)) {
                 Alert.alert("El teléfono debe tener el formato correcto (####-####)");
                 return;
+            } else if (clave !== confirmarClave) {
+                Alert.alert("Las contraseñas no coinciden");
+                return;
             }
 
             console.log("Pasa la validacion");
@@ -53,16 +56,25 @@ export default function SignUp({ navigation }) {
             formData.append('correoCliente', correo);
             formData.append('direccionCliente', direccion);
             formData.append('duiCliente', dui);
+            formData.append('nacimientoCliente', nacimientoCliente);
             formData.append('telefonoCliente', telefono);
             formData.append('claveCliente', clave);
             formData.append('confirmarClave', confirmarClave);
-            formData.append('nacimientoCliente', nacimientoCliente);
+            console.log(nombre);
+            console.log(apellido);
+            console.log(correo);
+            console.log(direccion);
+            console.log(dui);
+            console.log(nacimientoCliente);
+            console.log(telefono);
+            console.log(clave);
+            console.log(confirmarClave);
+
 
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=signUp`, {
                 method: 'POST',
                 body: formData
             });
-
             console.log("Pasa la peticion");
 
             const data = await response.json();
