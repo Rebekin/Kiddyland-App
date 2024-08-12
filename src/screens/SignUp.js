@@ -1,10 +1,9 @@
-
 import { StyleSheet, View, Alert, Image, ScrollView } from 'react-native';
-import { useState } from 'react';
-import * as Constantes from '../utils/constantes'
-//Import de componentes
-import Input from '../components/Inputs/Input'
-import InputPass from '../components/Inputs/MaskedInputPassword'
+import { useState, useEffect } from 'react';
+import * as Constantes from '../utils/constantes';
+// Import de componentes
+import Input from '../components/Inputs/Input';
+import InputPass from '../components/Inputs/MaskedInputPassword';
 import Boton from '../components/Buttons/Button';
 import Boton2 from '../components/Buttons/Button2';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
@@ -13,7 +12,6 @@ import InputEmail from '../components/Inputs/InputEmail';
 import DatePicker from '../components/Inputs/DatePicker';
 
 export default function SignUp({ navigation }) {
-
     const ip = Constantes.IP;
 
     // Estado de la app
@@ -24,43 +22,36 @@ export default function SignUp({ navigation }) {
     const [dui, setDui] = useState('');
     const [clave, setClave] = useState('');
     const [confirmarClave, setconfirmarClave] = useState('');
-    const [nacimientoCliente, setnacimientoCliente] = useState('');
-    const [dirreccion, setDireccion] = useState('');
+    const [nacimientoCliente, setnacimientoCliente] = useState(null); // null para manejar fecha vacía inicialmente
+    const [direccion, setDireccion] = useState('');
 
     // Expresiones regulares para validar DUI y teléfono
     const duiRegex = /^\d{8}-\d$/;
     const telefonoRegex = /^\d{4}-\d{4}$/;
 
-    // Props que recibe input
-    // placeHolder, setValor, contra, setTextChange
-
     const handleCreate = async () => {
-        console.log("Entra al metodo")
+        console.log("Entra al metodo");
         try {
             // Validar los campos
-            if (!nombre.trim() || !apellido.trim() || !correo.trim() || !dirreccion.trim() ||
-                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() || !nacimientoCliente.trim()) {
+            if (!nombre.trim() || !apellido.trim() || !correo.trim() || !direccion.trim() ||
+                !dui.trim() || !telefono.trim() || !clave.trim() || !confirmarClave.trim() || !nacimientoCliente) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
-            }
-
-            else if (!duiRegex.test(dui)) {
+            } else if (!duiRegex.test(dui)) {
                 Alert.alert("El DUI debe tener el formato correcto (########-#)");
                 return;
-            }
-
-            else if (!telefonoRegex.test(telefono)) {
+            } else if (!telefonoRegex.test(telefono)) {
                 Alert.alert("El teléfono debe tener el formato correcto (####-####)");
                 return;
             }
 
-            console.log("Pasa la validacion")
+            console.log("Pasa la validacion");
             // Si todos los campos son válidos, proceder con la creación del usuario
             const formData = new FormData();
             formData.append('nombreCliente', nombre);
             formData.append('apellidoCliente', apellido);
             formData.append('correoCliente', correo);
-            formData.append('direccionCliente', dirreccion);
+            formData.append('direccionCliente', direccion);
             formData.append('duiCliente', dui);
             formData.append('telefonoCliente', telefono);
             formData.append('claveCliente', clave);
@@ -72,28 +63,23 @@ export default function SignUp({ navigation }) {
                 body: formData
             });
 
-            console.log("Pasa la peticion")
+            console.log("Pasa la peticion");
 
             const data = await response.json();
             if (data.status) {
-                console.log("Entro al status")
+                console.log("Entro al status");
                 Alert.alert('Datos Guardados correctamente');
                 navigation.navigate('Sesion');
-            }
-
-            else {
-                console.log("Error status")
+            } else {
+                console.log("Error status");
                 Alert.alert('Error', data.error);
             }
-        }
-
-        catch (error) {
+        } catch (error) {
             Alert.alert('Ocurrió un error al intentar crear el usuario');
         }
     };
 
-    const handleNavigateToLogin = async () => {
-        // Función para navegar a la pantalla de login
+    const handleNavigateToLogin = () => {
         navigation.navigate('Sesion');
     };
 
@@ -144,21 +130,20 @@ export default function SignUp({ navigation }) {
                     secureTextEntry
                 />
                 <DatePicker
-                    placeholder="Fecha de nacimiento:"  // Ahora se usa como placeholder
+                    placeholder="Fecha de nacimiento"  // Ahora se usa como placeholder
                     date={nacimientoCliente}  // Pasar la fecha actual
                     setDate={setnacimientoCliente}  // Pasar la función para actualizar el estado
                 />
                 <Input
                     placeHolder='Dirección'
-                    setValor={setDireccion}
+                    setValor={direccion}
                     setTextChange={setDireccion}
                 />
                 <Boton2
                     mode="contained"
                     textoBoton='Registrarse'
                     accionBoton={handleCreate}
-                >
-                </Boton2>
+                />
                 <Boton
                     textoBoton="Regresar al inicio."
                     accionBoton={handleNavigateToLogin}
@@ -166,7 +151,7 @@ export default function SignUp({ navigation }) {
             </View>
         </ScrollView>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -177,7 +162,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#8FC2BB',
     },
     scrollViewContent: {
-        flexGrow: 1, // Asegura que el contenido se expanda para ajustarse al ScrollView
+        flexGrow: 1,
     },
     logo: {
         marginTop: 50,
