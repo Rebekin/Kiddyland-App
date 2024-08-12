@@ -25,19 +25,19 @@ const TabNavigator = () => {
                     borderTopColor: '#FFF',
                     height: Platform.OS === 'ios' ? 80 : 70, // Estilo de la barra de pestañas, altura diferente para iOS y Android
                 }, // Estilo de la barra de pestañas
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ color, size }) => {
                     let iconName;
                     if (route.name === 'Home') {
                         iconName = 'home-heart';
-                        return <MaterialCommunityIcons name={iconName} color={color} size={size} />;
+                        return <MaterialCommunityIcons name={iconName} color={color} size={35} />;
                     } else if (route.name === 'Productos') {
                         iconName = 'toys';
-                        return <MaterialIcons name={iconName} color={color} size={size} />;
+                        return <MaterialIcons name={iconName} color={color} size={30} />;
                     } else if (route.name === 'Carrito') {
                         return <FontAwesome5 name="shopping-basket" color={color} size={size} />;
                     } else if (route.name === 'Perfil') {
                         iconName = 'teddy-bear';
-                        return <MaterialCommunityIcons name={iconName} color={color} size={size} />;
+                        return <MaterialCommunityIcons name={iconName} color={color} size={30} />;
                     }
                 },
             })}
