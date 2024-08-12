@@ -5,6 +5,7 @@ import * as Constantes from '../utils/constantes'
 // Import de componentes
 import Input from '../components/Inputs/Input'
 import Boton2 from '../components/Buttons/Button2';
+import Boton3 from '../components/Buttons/Button3';
 import Boton4 from '../components/Buttons/Button4';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
@@ -60,6 +61,27 @@ export default function UpdateUser({ navigation }) {
             fillData();
         }, [])
     );
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logOut`, {
+                method: 'GET'
+            });
+
+            const data = await response.json();
+            if (data.status) {
+                navigation.navigate('Sesion');
+            } 
+            
+            else {
+                Alert.alert('Error', data.error);
+            }
+        } 
+        
+        catch (error) {
+            Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+        }
+    };
 
     const editProfile = async () => {
         try {
@@ -173,6 +195,11 @@ export default function UpdateUser({ navigation }) {
                     textoBoton='Volver al Inicio'
                     accionBoton={volverInicio}
                 />
+                 
+            <Boton3
+                textoBoton='Cerrar Sesión'
+                accionBoton={handleLogout}
+            />
             </ScrollView>
         </View>
     );

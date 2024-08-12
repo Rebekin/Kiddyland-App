@@ -75,6 +75,7 @@ export default function SignUp({ navigation }) {
                 method: 'POST',
                 body: formData,
             });
+            console.log("Pasa a la api");
 
             const data = await response.json();
             console.log(data);
@@ -143,7 +144,7 @@ export default function SignUp({ navigation }) {
                     secureTextEntry
                 />
                 <DatePicker
-                    placeholder="Fecha de nacimiento"  // Ahora se usa como placeholder
+                    placeholder="Fecha de nacimiento"
                     date={nacimientoCliente}  // Pasar la fecha actual
                     setDate={setnacimientoCliente}  // Pasar la función para actualizar el estado
                 />

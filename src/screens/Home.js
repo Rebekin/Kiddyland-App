@@ -19,14 +19,10 @@ export default function Home({ navigation }) {
             const data = await response.json();
             if (data.status) {
                 navigation.navigate('Sesion');
-            } 
-            
-            else {
+            } else {
                 Alert.alert('Error', data.error);
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
         }
     };
@@ -49,24 +45,20 @@ export default function Home({ navigation }) {
             if (data.status) {
                 setNombre(data.name.nombre_cliente);
                 setApellido(data.name.apellido_cliente);
-            } 
-            
-            else {
+            } else {
                 Alert.alert('Error', data.error);
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
         }
     };
 
-    // logica para cargar los datos del usuario al cargar la pantalla
     useFocusEffect(
         React.useCallback(() => {
             getUser();
         }, [])
     );
+
     return (
         <View style={styles.container}>
             <Image
@@ -75,16 +67,14 @@ export default function Home({ navigation }) {
             />
             <Text style={styles.title}>Bienvenid@</Text>
             <Text style={styles.subtitle}>
-                {nombre ? '"' + nombre + ' ' : 'No hay Nombre para mostrar'}
-                {apellido ? apellido + '"' : 'No hay Apellido para mostrar'}
+                {nombre ? `"${nombre} ` : 'Error al obtener el nombre'}
+            </Text>
+            <Text style={styles.subtitle}>
+                {apellido ? `${apellido}"` : 'Error al obtener el apellido'}
             </Text>
             <Boton2
                 textoBoton='Ver Productos'
                 accionBoton={irActualizar}
-            />
-            <Boton2
-                textoBoton='Mi perfil'
-                accionBoton={EditUser}
             />
             <Boton3
                 textoBoton='Cerrar Sesión'
@@ -97,38 +87,37 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000000',
+        backgroundColor: '#8FC2BB',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingHorizontal: 20, // Agrega espacio lateral
     },
     image: {
-        width: 400,
-        height: 100,
-        marginBottom: 10
-    },
-    button: {
-        borderWidth: 2,
-        borderColor: "black",
-        width: 100,
-        borderRadius: 10,
-        backgroundColor: "darkblue"
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: "white"
+        width: 150,
+        height: 150,
+        marginBottom: 20, // Aumenta el espacio debajo de la imagen
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#838484', // Brown color for the title
+        color: 'black',
+        marginBottom: 10, // Espacio adicional debajo del título
     },
     subtitle: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: '600',
         textAlign: 'center',
         marginVertical: 5,
-        marginBottom: 20,
-        color: '#838484', // Brown color for the title
+        color: '#838484',
+    },
+    button: {
+        width: '80%',
+        marginVertical: 10, // Espacio entre botones
+    },
+    buttonText: {
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 18, // Texto más grande en el botón
     },
 });
