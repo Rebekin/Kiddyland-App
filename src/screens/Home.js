@@ -61,17 +61,19 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Image
-                source={require('../../assets/logo.png')}
-                style={styles.image}
-            />
-            <Text style={styles.title}>Bienvenid@</Text>
+            
+            <Text style={styles.title}>Bienvenido a Kiddyland</Text>
             <Text style={styles.subtitle}>
                 {nombre ? `"${nombre} ` : 'Error al obtener el nombre'}
             </Text>
             <Text style={styles.subtitle}>
                 {apellido ? `${apellido}"` : 'Error al obtener el apellido'}
             </Text>
+            <Image
+                source={require('../../assets/logo.png')}
+                style={styles.image}
+            />
+            <Text style={styles.subtitle2}>Somos la mejor opción para la diversión de tus hijos</Text>
             <Boton2
                 textoBoton='Ver Productos'
                 accionBoton={irActualizar}
@@ -93,23 +95,23 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20, // Agrega espacio lateral
     },
     image: {
-        width: 150,
-        height: 150,
-        marginBottom: 20, // Aumenta el espacio debajo de la imagen
+        width: 300,
+        height: 300,
+        marginBottom: 10, // Aumenta el espacio debajo de la imagen
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: 'black',
-        marginBottom: 10, // Espacio adicional debajo del título
+        color: 'white',
+        marginBottom: 5, // Espacio adicional debajo del título
     },
     subtitle: {
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: '600',
         textAlign: 'center',
         marginVertical: 5,
-        color: '#838484',
+        color: 'white',
     },
     button: {
         width: '80%',
@@ -119,5 +121,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         fontSize: 18, // Texto más grande en el botón
+    },subtitle2: {
+        fontSize: 15,
+        fontWeight: '600',
+        textAlign: 'center',
+        marginVertical: 5,
+        color: 'white',
+        margin: 30,
     },
 });
