@@ -12,7 +12,7 @@ export default function Home({ navigation }) {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=logOut`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=logOut`, {
                 method: 'GET'
             });
 
@@ -41,7 +41,7 @@ export default function Home({ navigation }) {
 
     const getUser = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/clientes.php?action=getUser`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/clientes.php?action=getUser`, {
                 method: 'GET'
             });
 

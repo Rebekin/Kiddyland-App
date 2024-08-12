@@ -66,7 +66,7 @@ const Carrito = ({ navigation }) => {
     // Función para finalizar el pedido
     const finalizarPedido = async () => {
         try {
-            const response = await fetch(`${ip}/P-Z/api/services/public/pedido.php?action=finishOrder`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=finishOrder`, {
                 method: 'GET',
             });
 

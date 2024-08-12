@@ -44,7 +44,7 @@ export default function Productos({ navigation }) {
             formData.append('idCategoria', idCategoriaSelect);
 
             // Utilizar la direccion IP del servidor y no localhost
-            const response = await fetch(`${ip}/P-Z/api/services/public/producto.php?action=readProductosCategoriaMobile`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/producto.php?action=readProductosCategoriaMobile`, {
                 method: 'POST',
                 body: formData
             });
@@ -73,7 +73,7 @@ export default function Productos({ navigation }) {
         try {
 
             //utilizar la direccion IP del servidor y no localhost
-            const response = await fetch(`${ip}/P-Z/api/services/public/categorias.php?action=readAll`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/categorias.php?action=readAll`, {
                 method: 'GET',
             });
 

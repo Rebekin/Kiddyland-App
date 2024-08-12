@@ -24,7 +24,7 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
                 formData.append('colorProducto', nombreColor);
                 formData.append('tallaProducto', numeroTalla);
 
-                const response = await fetch(`${ip}/P-Z/api/services/public/pedido.php?action=createDetail`, {
+                const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=createDetail`, {
                     method: 'POST',
                     body: formData
                 });

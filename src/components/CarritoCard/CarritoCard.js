@@ -24,7 +24,7 @@ const CarritoCard = ({ item, accionBotonDetalle, updateDataDetalleCarrito }) => 
                         onPress: async () => {
                             const formData = new FormData();
                             formData.append('idDetalle', idDetalle);
-                            const response = await fetch(`${ip}/P-Z/api/services/public/pedido.php?action=deleteDetail`, {
+                            const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=deleteDetail`, {
                                 method: 'POST',
                                 body: formData
                             });
