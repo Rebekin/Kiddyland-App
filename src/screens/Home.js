@@ -17,6 +17,7 @@ export default function Home({ navigation }) {
             });
 
             const data = await response.json();
+            console.log(data);
             if (data.status) {
                 navigation.navigate('Sesion');
             } else {
@@ -31,25 +32,27 @@ export default function Home({ navigation }) {
         navigation.navigate('Productos');
     };
 
-    const EditUser = () => {
-        navigation.navigate('UpdateUser');
-    };
-
     const getUser = async () => {
         try {
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=getUser`, {
                 method: 'GET'
             });
-
+            console.log(data.name);
             const data = await response.json();
             if (data.status) {
-                setNombre(data.name.nombre_cliente);
-                setApellido(data.name.apellido_cliente);
+                console.log(data.name);
+                if (data.name) {
+                    console.log(data.name);
+                    setNombre(data.name.nombre_cliente);
+                    setApellido(data.name.apellido_cliente);
+                } else {
+                    Alert.alert('Error', 'No se encontraron los datos del usuario');
+                }
             } else {
                 Alert.alert('Error', data.error);
             }
         } catch (error) {
-            Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
+            Alert.alert('Error', 'Ocurrió un error al cargar la sesión');
         }
     };
 
@@ -61,13 +64,13 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
-            
+
             <Text style={styles.title}>Bienvenido a Kiddyland</Text>
             <Text style={styles.subtitle}>
-                {nombre ? `"${nombre} ` : 'Error al obtener el nombre'}
+                {nombre ? '"' + nombre + ' ' : 'No hay Nombre para mostrar'}
             </Text>
             <Text style={styles.subtitle}>
-                {apellido ? `${apellido}"` : 'Error al obtener el apellido'}
+                {apellido ? apellido + '"' : 'No hay Apellido para mostrar'}
             </Text>
             <Image
                 source={require('../../assets/logo.png')}
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         fontSize: 18, // Texto más grande en el botón
-    },subtitle2: {
+    }, subtitle2: {
         fontSize: 15,
         fontWeight: '600',
         textAlign: 'center',
