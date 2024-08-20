@@ -11,8 +11,8 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Sesion({ navigation }) {
 
     // Estado de la app
-    const [correo, setCorreo] = useState('carlos@gmail.com');
-    const [clave, setClave] = useState('123456789');
+    const [correo, setCorreo] = useState('');
+    const [clave, setClave] = useState('');
 
     const ip = Constantes.IP;
 
