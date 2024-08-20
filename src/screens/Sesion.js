@@ -11,8 +11,8 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Sesion({ navigation }) {
 
     // Estado de la app
-    const [correo, setCorreo] = useState('');
-    const [clave, setClave] = useState('');
+    const [correo, setCorreo] = useState('carlos@gmail.com');
+    const [clave, setClave] = useState('123456789');
 
     const ip = Constantes.IP;
 
@@ -57,8 +57,8 @@ export default function Sesion({ navigation }) {
 
         try {
             const formData = new FormData();
-            formData.append('correo', correo);
-            formData.append('clave', clave);
+            formData.append('correoCliente', correo);
+            formData.append('claveCliente', clave);
 
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logIn`, {
                 method: 'POST',

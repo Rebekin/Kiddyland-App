@@ -37,7 +37,6 @@ export default function Home({ navigation }) {
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=getUser`, {
                 method: 'GET'
             });
-            console.log(data.name);
             const data = await response.json();
             if (data.status) {
                 console.log(data.name);
@@ -67,10 +66,10 @@ export default function Home({ navigation }) {
 
             <Text style={styles.title}>Bienvenido a Kiddyland</Text>
             <Text style={styles.subtitle}>
-                {nombre ? '"' + nombre + ' ' : 'No hay Nombre para mostrar'}
+                {nombre ?  nombre : 'No hay Nombre para mostrar'}
             </Text>
             <Text style={styles.subtitle}>
-                {apellido ? apellido + '"' : 'No hay Apellido para mostrar'}
+                {apellido ? apellido  : 'No hay Apellido para mostrar'}
             </Text>
             <Image
                 source={require('../../assets/logo.png')}
