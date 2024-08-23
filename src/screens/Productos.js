@@ -135,8 +135,7 @@ export default function Productos({ navigation }) {
             <TouchableOpacity
                 style={styles.cartButton}
                 onPress={irCarrito}>
-                <FontAwesome name="shopping-cart" size={24} color="white" />
-                <Text style={styles.cartButtonText}>Ir al carrito</Text>
+                <Text style={styles.cartButtonText}>Ver mi carrito</Text>
             </TouchableOpacity>
         </View>
     );
@@ -154,12 +153,13 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#60BFB2',
+        backgroundColor: '#8FC2BB',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
     },
     title: {
+        marginTop:55,
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -183,18 +183,17 @@ const styles = StyleSheet.create({
         color: '#000000',
     },
     cartButton: {
-        flexDirection: 'row',
+        margin: 15,
+        width: 170,
+        height: 40,
+        backgroundColor: '#AD6638',
+        borderRadius: 50,
+        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#3C38B0',
-        borderRadius: 5,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginVertical: 10,
     },
     cartButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '600',
-        marginLeft: 10,
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white',
     },
 });

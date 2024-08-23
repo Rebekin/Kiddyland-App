@@ -105,12 +105,12 @@ export default function SignUp({ navigation }) {
                     style={styles.logo}
                 />
                 <Input
-                    placeHolder="Nombre(s):"
+                    placeHolder="Nombre:"
                     setValor={nombre}
                     setTextChange={setNombre}
                 />
                 <Input
-                    placeHolder="Apellido(s):"
+                    placeHolder="Apellido:"
                     setValor={apellido}
                     setTextChange={setApellido}
                 />
@@ -149,7 +149,7 @@ export default function SignUp({ navigation }) {
                     setDate={setnacimientoCliente}  // Pasar la función para actualizar el estado
                 />
                 <Input
-                    placeHolder='Dirección'
+                    placeHolder='Dirección:'
                     setValor={direccion}
                     setTextChange={setDireccion}
                 />

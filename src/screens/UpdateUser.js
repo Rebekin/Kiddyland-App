@@ -139,18 +139,18 @@ export default function UpdateUser({ navigation }) {
             <ScrollView contentContainerStyle={styles.scrollViewStyle}>
                 <Text style={styles.texto}>Datos del perfil</Text>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.title}>Nombre(s):</Text>
+                    <Text style={styles.title}>Nombre:</Text>
                     <Input
-                        placeHolder="Nombre(s):"
+                        placeHolder="Nombre:"
                         setValor={nombre}
                         setTextChange={setNombre}
                         setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.title}>Apellido(s):</Text>
+                    <Text style={styles.title}>Apellido:</Text>
                     <Input
-                        placeHolder="Apellido(s):"
+                        placeHolder="Apellido:"
                         setValor={apellido}
                         setTextChange={setApellido}
                         setEditable={false} // No editable en vista principal
@@ -218,7 +218,7 @@ export default function UpdateUser({ navigation }) {
                             ¿Estás seguro de que deseas actualizar los datos del perfil?
                         </Text>
                         <View style={styles.inputContainer}>
-                            <Text style={styles.title}>Nombre(s):</Text>
+                            <Text style={styles.title}>Nombre:</Text>
                             <Input
                                 placeHolder="Nombre(s):"
                                 setValor={modalNombre}
@@ -227,7 +227,7 @@ export default function UpdateUser({ navigation }) {
                             />
                         </View>
                         <View style={styles.inputContainer}>
-                            <Text style={styles.title}>Apellido(s):</Text>
+                            <Text style={styles.title}>Apellido:</Text>
                             <Input
                                 placeHolder="Apellido(s):"
                                 setValor={modalApellido}
@@ -273,7 +273,7 @@ export default function UpdateUser({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#60BFB2',
+        backgroundColor: '#8FC2BB',
     },
     scrollViewStyle: {
         alignItems: 'center',
@@ -283,12 +283,12 @@ const styles = StyleSheet.create({
         marginTop: 120,
         marginBottom: 15,
         color: '#FFF',
-        fontWeight: '900',
+        fontWeight: 'white',
         fontSize: 22
     },
     title: {
         marginTop: 10,
-        color: '#838484',
+        color: 'white',
         fontWeight: '500',
         fontSize: 16
     },
