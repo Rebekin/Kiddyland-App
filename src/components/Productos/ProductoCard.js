@@ -1,28 +1,37 @@
 import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
 
-export default function ProductoCard({ ip, imagenProducto, nombreProducto, descripcionProducto, precioProducto, 
-    existenciasProducto, numeroTalla, nombreColor, accionBotonProducto, idDetalleProducto, idProducto
+export default function ProductoCard({
+    ip,
+    imagen_producto,
+    nombre_producto,
+    descripcion_producto,
+    precio_producto,
+    existencias_producto,
+    accionBotonProducto,
+    id_producto
 }) {
-
     return (
-        <View key={`${idProducto}-${idDetalleProducto}`} style={styles.card}>
+        <View key={id_producto} style={styles.card}>
             <View style={styles.imageContainer}>
                 <Image
-                    source={{ uri: `${ip}/Kiddyland/api/images/productos/${imagenProducto}` }}
+                    source={{ uri: `${ip}/Kiddyland/api/images/productos/${imagen_producto}` }}
                     style={styles.image}
                     resizeMode="contain" // Ajustar la imagen al contenedor
                 />
             </View>
-            <Text style={styles.textTitle}>{nombreProducto}</Text>
-            <Text style={styles.text}>{descripcionProducto}</Text>
-            <Text style={styles.textTitle}>Tallas disponibles: <Text style={styles.textDentro}>{numeroTalla}</Text></Text>
-            <Text style={styles.textTitle}>Colores disponibles: <Text style={styles.textDentro}>{nombreColor}</Text></Text>
-            <Text style={styles.textTitle}>Precio: <Text style={styles.textDentro}>${precioProducto}</Text></Text>
-            <Text style={styles.textTitle}>Existencias: <Text style={styles.textDentro}>{existenciasProducto} {(existenciasProducto === 1) ? 'Unidad' : 'Unidades'}</Text></Text>
-            <TouchableOpacity
-                style={styles.cartButton}
-                onPress={accionBotonProducto}>
+            <Text style={styles.textTitle}>{nombre_producto}</Text>
+            <Text style={styles.text}>{descripcion_producto}</Text>
+            <Text style={styles.textTitle}>
+                Precio: <Text style={styles.textDentro}>${precio_producto}</Text>
+            </Text>
+            <Text style={styles.textTitle}>
+                Existencias:{" "}
+                <Text style={styles.textDentro}>
+                    {existencias_producto} {existencias_producto === 1 ? "Unidad" : "Unidades"}
+                </Text>
+            </Text>
+            <TouchableOpacity style={styles.cartButton} onPress={accionBotonProducto}>
                 <FontAwesome name="plus-circle" size={24} color="white" />
                 <Text style={styles.cartButtonText}>Seleccionar Producto</Text>
             </TouchableOpacity>
@@ -63,8 +72,8 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 16,
-        marginBottom: 8, 
-        fontWeight: '700'
+        marginBottom: 8,
+        fontWeight: '700',
     },
     inputContainer: {
         flexDirection: 'row',
@@ -87,9 +96,9 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         alignItems: 'center', // Centrar imagen horizontalmente
-    }, 
+    },
     textDentro: {
-        fontWeight: '400'
+        fontWeight: '400',
     },
     cartButton: {
         flexDirection: 'row',
@@ -106,6 +115,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600',
         marginLeft: 10,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 });

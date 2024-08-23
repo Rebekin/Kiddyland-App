@@ -13,8 +13,6 @@ export default function Productos({ navigation }) {
     const [dataProductos, setDataProductos] = useState([])
     const [dataCategorias, setDataCategorias] = useState([])
     const [selectedValue, setSelectedValue] = useState(null);
-    const [nombreColor, setnombreColor] = useState('');
-    const [numeroTalla, setnumeroTalla] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [modalVisible, setModalVisible] = useState(false)
     const [idProductoModal, setIdProductoModal] = useState('')
@@ -73,12 +71,13 @@ export default function Productos({ navigation }) {
         try {
 
             //utilizar la direccion IP del servidor y no localhost
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/categorias.php?action=readAll`, {
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/categoria.php?action=readAll`, {
                 method: 'GET',
             });
 
             const data = await response.json();
             if (data.status) {
+                console.log(data);
                 setDataCategorias(data.dataset)
             }
 
@@ -119,10 +118,6 @@ export default function Productos({ navigation }) {
                 idProductoModal={idProductoModal}
                 cantidad={cantidad}
                 setCantidad={setCantidad}
-                nombreColor={nombreColor}
-                setnombreColor={setnombreColor}
-                numeroTalla={numeroTalla}
-                setnumeroTalla={setnumeroTalla}
             />
             <View>
                 <Text style={styles.subtitle}>
@@ -149,8 +144,6 @@ export default function Productos({ navigation }) {
                             imagenProducto={item.img_producto}
                             nombreProducto={item.nombre_producto}
                             descripcionProducto={item.desc_producto}
-                            numeroTalla={item.numero_talla}
-                            nombreColor={item.nombre_color}
                             precioProducto={item.precio_producto}
                             existenciasProducto={item.existencias}
                             accionBotonProducto={() => handleCompra(item.nombre_producto, item.id_producto, 
