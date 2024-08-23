@@ -41,8 +41,8 @@ export default function UpdateUser({ navigation }) {
                 setApellido(data.name.apellido_cliente);
                 setCorreo(data.name.correo_cliente);
                 setGenero(data.name.genero_cliente);
-                setDui(data.name.dui_client);
-                setTelefono(data.name.telf_cliente);
+                setDui(data.name.dui_cliente);
+                setTelefono(data.name.telefono_cliente);
             }
             
             else {
@@ -195,7 +195,7 @@ export default function UpdateUser({ navigation }) {
                     textoBoton='Volver al Inicio'
                     accionBoton={volverInicio}
                 />
-                 
+                
             <Boton3
                 textoBoton='Cerrar Sesión'
                 accionBoton={handleLogout}
