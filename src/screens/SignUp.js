@@ -4,8 +4,8 @@ import * as Constantes from '../utils/constantes';
 // Import de componentes
 import Input from '../components/Inputs/Input';
 import InputPass from '../components/Inputs/MaskedInputPassword';
-import Boton from '../components/Buttons/Button';
-import Boton2 from '../components/Buttons/Button2';
+import Boton from '../components/Buttons/ButtonPrimero';
+import Boton2 from '../components/Buttons/ButtonSecundario';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import MaskedInputDui from '../components/Inputs/MaskedInputDui';
 import InputEmail from '../components/Inputs/InputEmail';
@@ -28,6 +28,7 @@ export default function SignUp({ navigation }) {
     // Expresiones regulares para validar DUI y teléfono
     const duiRegex = /^\d{8}-\d$/;
     const telefonoRegex = /^\d{4}-\d{4}$/;
+    const emailRegex = /^[a-z][a-z._-]+@[a-z]+\.[a-z]{2,}$/;
 
     // Función para formatear la fecha en YYYY-MM-DD
     const formatDate = (date) => {
@@ -56,6 +57,11 @@ export default function SignUp({ navigation }) {
                 Alert.alert("Las contraseñas no coinciden");
                 return;
             }
+            else if (!emailRegex.test(correo)) {
+                Alert.alert("El correo electrónico debe comenzar con una letra minúscula y no debe contener números");
+                return;
+            }
+            
 
             console.log("Pasa la validacion");
             // Si todos los campos son válidos, proceder con la creación del usuario

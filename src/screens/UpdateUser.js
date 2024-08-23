@@ -4,9 +4,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import * as Constantes from '../utils/constantes';
 // Import de componentes
 import Input from '../components/Inputs/Input';
-import Boton2 from '../components/Buttons/Button2';
-import Boton3 from '../components/Buttons/Button3';
-import Boton4 from '../components/Buttons/Button4';
+import Boton2 from '../components/Buttons/ButtonSecundario';
+import Boton3 from '../components/Buttons/ButtonBlanco';
+import Boton4 from '../components/Buttons/ButtonCafe';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
 import InputDireccion from '../components/Inputs/InputDireccion'; // Asegúrate de crear este componente
 
