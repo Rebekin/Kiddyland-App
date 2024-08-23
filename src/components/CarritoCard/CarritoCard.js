@@ -53,11 +53,8 @@ const CarritoCard = ({ item, accionBotonDetalle, updateDataDetalleCarrito }) => 
 
     return (
         <View style={styles.itemContainer}>
-            <Text style={styles.itemText}>Identificador del detalle: <Text style={styles.textDentro}>{item.id_detalle}</Text></Text>
             <Text style={styles.itemText}>Nombre: <Text style={styles.textDentro}>{item.nombre_producto}</Text></Text>
             <Text style={styles.itemText}>Precio: <Text style={styles.textDentro}>${item.precio_producto}</Text></Text>
-            <Text style={styles.itemText}>Color: <Text style={styles.textDentro}>{item.nombre_color}</Text></Text>
-            <Text style={styles.itemText}>Talla: <Text style={styles.textDentro}>{item.numero_talla}</Text></Text>
             <Text style={styles.itemText}>Cantidad: <Text style={styles.textDentro}>{item.cantidad_producto}</Text></Text>
             <Text style={styles.itemText}>SubTotal: <Text style={styles.textDentro}>${(parseFloat(item.cantidad_producto) 
                 * parseFloat(item.precio_producto)).toFixed(2)}</Text></Text>

@@ -12,7 +12,7 @@ const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCant
         try {
             if (cantidadProductoCarrito <= 0) {
                 Alert.alert("La cantidad no puede ser igual o menor a 0");
-                return; // Corrige la lógica aquí
+                return;
             }
 
             const formData = new FormData();

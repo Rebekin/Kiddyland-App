@@ -1,68 +1,53 @@
 import React from 'react';
-import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, Text, Modal, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
 import Boton3 from '../../components/Buttons/Button3';
 import Boton5 from '../../components/Buttons/Button5';
-import * as Constantes from '../../utils/constantes'
+import * as Constantes from '../../utils/constantes';
 
-const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal, cantidad, setCantidad, 
-    nombreColor, numeroTalla}) => {
-
+const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModal, cantidad, setCantidad }) => {
     const ip = Constantes.IP;
 
     const handleCreateDetail = async () => {
+        if (!cantidad || cantidad <= 0 || isNaN(cantidad)) {
+            Alert.alert("Error", "La cantidad debe ser un número mayor a 0.");
+            return;
+        }
 
         try {
-            if ((cantidad < 0)) {
-                Alert.alert("Debes llenar todos los campos")
-                return
+            const formData = new FormData();
+            formData.append('idProducto', idProductoModal);
+            formData.append('cantidadProducto', cantidad.toString());
+
+            const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=createDetail`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            console.log("data despues del response", data);
+
+            if (data.status) {
+                Alert.alert('Éxito', 'Datos guardados correctamente.');
+                cerrarModal(false);
+            } else {
+                Alert.alert('Error', data.error);
             }
-
-            else {
-                const formData = new FormData();
-                formData.append('idDetalleProducto', idProductoModal);
-                formData.append('cantidadProducto', cantidad);
-                formData.append('colorProducto', nombreColor);
-                formData.append('tallaProducto', numeroTalla);
-
-                const response = await fetch(`${ip}/Kiddyland/api/services/public/pedido.php?action=createDetail`, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-                console.log("data despues del response", data);
-
-                if (data.status) {
-                    Alert.alert('Datos Guardados correctamente');
-                    cerrarModal(false);
-                } 
-                
-                else {
-                    Alert.alert('Error', data.error);
-                }
-            }
-
-        } 
-        
-        catch (error) {
-            Alert.alert('Ocurrió un error al crear detalle');
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Ocurrió un error al crear el detalle.');
         }
     };
 
     const handleCancelCarrito = () => {
-        // Lógica para agregar al carrito con la cantidad ingresada
-        cerrarModal(false)
+        cerrarModal(false);
     };
 
-    //logica para la compra del producto - agregar el producto al carrito
     return (
         <Modal
             visible={visible}
             animationType="slide"
             transparent={true}
-            onRequestClose={() => {
-                cerrarModal(!visible);
-            }}
+            onRequestClose={() => cerrarModal(false)}
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -75,14 +60,16 @@ const ModalCompra = ({ visible, cerrarModal, nombreProductoModal, idProductoModa
                         keyboardType="numeric"
                         placeholder="Ingrese la cantidad"
                     />
-                    <Boton5
-                        textoBoton='Agregar al carrito'
-                        accionBoton={() => handleCreateDetail()}
-                    />
-                    <Boton3
-                        textoBoton='Cancelar'
-                        accionBoton={() => handleCancelCarrito()}
-                    />
+                    <View style={styles.buttonContainer}>
+                        <Boton5
+                            textoBoton='Agregar al carrito'
+                            accionBoton={handleCreateDetail}
+                        />
+                        <Boton3
+                            textoBoton='Cancelar'
+                            accionBoton={handleCancelCarrito}
+                        />
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -123,6 +110,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 200,
         textAlign: 'center',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
     },
 });
 
