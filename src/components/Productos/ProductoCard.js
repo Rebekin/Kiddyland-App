@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ProductoCard({
     ip,
@@ -17,7 +17,7 @@ export default function ProductoCard({
                 <Image
                     source={{ uri: `${ip}/Kiddyland/api/images/productos/${imagen_producto}` }}
                     style={styles.image}
-                    resizeMode="contain" // Ajustar la imagen al contenedor
+                    resizeMode="contain"
                 />
             </View>
             <Text style={styles.textTitle}>{nombre_producto}</Text>
@@ -40,23 +40,12 @@ export default function ProductoCard({
 }
 
 const styles = StyleSheet.create({
-    containerFlat: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#EAD8C0',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: StatusBar.currentHeight || 0,
-    },
     card: {
         backgroundColor: '#ffffff',
         borderRadius: 8,
-        padding: 16,
-        marginVertical: 1,
-        marginHorizontal: 16,
+        padding: 10,
+        marginVertical: 8,
+        marginHorizontal: 4,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -75,27 +64,14 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         fontWeight: '700',
     },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
-    },
-    input: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 8,
-        marginLeft: 8,
-    },
     image: {
-        width: '65%',
+        width: '100%',
         height: 150,
         borderRadius: 8,
         marginBottom: 12,
     },
     imageContainer: {
-        alignItems: 'center', // Centrar imagen horizontalmente
+        alignItems: 'center',
     },
     textDentro: {
         fontWeight: '400',

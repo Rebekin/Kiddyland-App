@@ -5,10 +5,9 @@ import ProductoCard from '../components/Productos/ProductoCard';
 import ModalCompra from '../components/Modales/ModalCompra';
 import RNPickerSelect from 'react-native-picker-select';
 import Constants from 'expo-constants';
-import { FontAwesome } from '@expo/vector-icons'; // Importamos el ícono
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function Productos({ navigation }) {
-
     const ip = Constantes.IP;
     const [dataProductos, setDataProductos] = useState([]);
     const [dataCategorias, setDataCategorias] = useState([]);
@@ -17,13 +16,13 @@ export default function Productos({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [idProductoModal, setIdProductoModal] = useState('');
     const [nombreProductoModal, setNombreProductoModal] = useState('');
+    const [numColumns, setNumColumns] = useState(2);
 
     const volverInicio = async () => {
         navigation.navigate('Home');
     };
 
     const handleCompra = (nombre, id, color, talla) => {
-        console.log(nombre, id, color, talla);
         setModalVisible(true);
         setIdProductoModal(id);
         setNombreProductoModal(nombre);
@@ -43,7 +42,6 @@ export default function Productos({ navigation }) {
             });
 
             const data = await response.json();
-            console.log(data);
             if (data.status) {
                 setDataProductos(data.dataset);
             } else {
@@ -88,7 +86,7 @@ export default function Productos({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Catalogo de Productos</Text>
+            <Text style={styles.title}>Catálogo de Productos</Text>
             <ModalCompra
                 visible={modalVisible}
                 cerrarModal={setModalVisible}
@@ -99,7 +97,7 @@ export default function Productos({ navigation }) {
             />
             <View>
                 <Text style={styles.subtitle}>
-                    Categoria de productos disponibles
+                    Categoría de productos disponibles
                 </Text>
                 <View style={styles.pickerContainer}>
                     <RNPickerSelect
@@ -115,6 +113,7 @@ export default function Productos({ navigation }) {
             </View>
             <SafeAreaView style={styles.containerFlat}>
                 <FlatList
+                    key={`flatlist-${numColumns}`}
                     data={dataProductos}
                     keyExtractor={(item) => item.id_producto}
                     renderItem={({ item }) => (
@@ -129,12 +128,14 @@ export default function Productos({ navigation }) {
                             id_producto={item.id_producto}
                         />
                     )}
+                    numColumns={numColumns}
+                    columnWrapperStyle={styles.row}
                 />
             </SafeAreaView>
             <TouchableOpacity
                 style={styles.cartButton}
                 onPress={irCarrito}>
-                <FontAwesome name="shopping-cart" size={24} color="white"/>
+                <FontAwesome name="shopping-cart" size={24} color="white" />
                 <Text style={styles.cartButtonText}>Ir al carrito</Text>
             </TouchableOpacity>
         </View>
@@ -145,6 +146,11 @@ const styles = StyleSheet.create({
     containerFlat: {
         flex: 1,
         paddingTop: Constants.statusBarHeight,
+        paddingHorizontal: 10, // Ajuste para evitar que las tarjetas se sobrepongan
+    },
+    row: {
+        flex: 1,
+        justifyContent: 'space-between',
     },
     container: {
         flex: 1,
@@ -153,62 +159,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
     },
-    card: {
-        backgroundColor: '#ffffff',
-        borderRadius: 8,
-        padding: 16,
-        marginVertical: 1,
-        marginHorizontal: 16,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    text: {
-        fontSize: 16,
-        marginBottom: 8,
-    },
-    textTitle: {
-        fontSize: 16,
-        marginBottom: 8,
-        fontWeight: '700',
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
-    },
-    input: {
-        flex: 1,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 8,
-        marginLeft: 8,
-    },
-    image: {
-        width: '65%',
-        height: 150,
-        borderRadius: 8,
-        marginBottom: 12,
-    },
-    imageContainer: {
-        alignItems: 'center',
-    },
-    textDentro: {
-        fontWeight: '400',
-    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginVertical: 16,
-        marginTop: 25,
         color: '#fff',
+    },
+    subtitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        marginVertical: 7,
+        color: '#fff',
+    },
+    pickerContainer: {
+        borderColor: '#fff',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        backgroundColor: '#fff',
+        marginBottom: 15, // Añadir espacio debajo del picker
+    },
+    picker: {
+        color: '#000000',
     },
     cartButton: {
         flexDirection: 'row',
@@ -224,21 +196,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600',
         marginLeft: 10,
-    },
-    subtitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        marginVertical: 7,
-        marginHorizontal: 5,
-        color: '#fff',
-    },
-    pickerContainer: {
-        borderColor: '#fff',
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        backgroundColor: '#fff',
-    },
-    picker: {
-        color: '#000000',
     },
 });
