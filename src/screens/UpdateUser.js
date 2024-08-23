@@ -1,29 +1,33 @@
-import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, Alert, ScrollView, Modal, Button } from 'react-native';
+import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import * as Constantes from '../utils/constantes'
+import * as Constantes from '../utils/constantes';
 // Import de componentes
-import Input from '../components/Inputs/Input'
+import Input from '../components/Inputs/Input';
 import Boton2 from '../components/Buttons/Button2';
 import Boton3 from '../components/Buttons/Button3';
 import Boton4 from '../components/Buttons/Button4';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
-import MaskedInputDui from '../components/Inputs/MaskedInputDui';
-import InputEmail from '../components/Inputs/InputEmail';
+import InputDireccion from '../components/Inputs/InputDireccion'; // Asegúrate de crear este componente
 
 export default function UpdateUser({ navigation }) {
-
     const ip = Constantes.IP;
 
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
-    const [correo, setCorreo] = useState('');
     const [telefono, setTelefono] = useState('');
+    const [correo, setCorreo] = useState('');
     const [dui, setDui] = useState('');
-    const [genero, setGenero] = useState('');
+    const [direccion, setDireccion] = useState('');
 
-    // Expresiones regulares para validar DUI y teléfono
-    const duiRegex = /^\d{8}-\d$/;
+    // Estado para el modal
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [modalNombre, setModalNombre] = useState('');
+    const [modalApellido, setModalApellido] = useState('');
+    const [modalTelefono, setModalTelefono] = useState('');
+    const [modalDireccion, setModalDireccion] = useState('');
+
+    // Expresiones regulares para validar teléfono
     const telefonoRegex = /^\d{4}-\d{4}$/;
 
     // Funcion para llenar los inputs con los datos del usuario
@@ -36,28 +40,24 @@ export default function UpdateUser({ navigation }) {
             const data = await response.json();
             console.log("Data en actualizar consultada", data);
             if (data.status) {
-                console.log(data.name, 'Valor de editar perfil')
+                console.log(data.name, 'Valor de editar perfil');
                 setNombre(data.name.nombre_cliente);
                 setApellido(data.name.apellido_cliente);
-                setCorreo(data.name.correo_cliente);
-                setGenero(data.name.genero_cliente);
-                setDui(data.name.dui_cliente);
                 setTelefono(data.name.telefono_cliente);
+                setDireccion(data.name.direccion_cliente);
+                setDui(data.name.dui_cliente);
+                setCorreo(data.name.correo_cliente);
+            } else {
+                Alert.alert('Error', data.error || 'Error desconocido');
             }
-            
-            else {
-                Alert.alert('Error', data.error);
-            }
-        }
-
-        catch (error) {
+        } catch (error) {
             Alert.alert('Ocurrió un error al intentar obtener los datos del usuario');
         }
     };
 
     // Logica para cargar los datos del usuario al cargar la pantalla
     useFocusEffect(
-        React.useCallback(() => {
+        useCallback(() => {
             fillData();
         }, [])
     );
@@ -71,73 +71,67 @@ export default function UpdateUser({ navigation }) {
             const data = await response.json();
             if (data.status) {
                 navigation.navigate('Sesion');
-            } 
-            
-            else {
-                Alert.alert('Error', data.error);
+            } else {
+                Alert.alert('Error', data.error || 'Error desconocido');
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
         }
     };
 
     const editProfile = async () => {
         try {
-            console.log("Datos a enviar", nombre, apellido, correo, genero, dui, telefono)
+            console.log("Datos a enviar", modalNombre, modalApellido, modalTelefono, modalDireccion);
 
             // Validar los campos
-            if (!nombre.trim() || !apellido.trim() || !correo.trim() || !genero.trim() ||
-                !dui.trim() || !telefono.trim()) {
+            if (!modalNombre.trim() || !modalApellido.trim() || !modalTelefono.trim() || !modalDireccion.trim()) {
                 Alert.alert("Debes llenar todos los campos");
                 return;
-            } 
-            
-            else if (!duiRegex.test(dui)) {
-                Alert.alert("El DUI debe tener el formato correcto (########-#)");
-                return;
-            } 
-            
-            else if (!telefonoRegex.test(telefono)) {
+            } else if (!telefonoRegex.test(modalTelefono)) {
                 Alert.alert("El teléfono debe tener el formato correcto (####-####)");
                 return;
             }
 
-            // Si todos los campos son válidos, proceder con la creación del usuario
+            // Si todos los campos son válidos, proceder con la edición del perfil
             const formData = new FormData();
-            formData.append('nombreClientePerfil', nombre);
-            formData.append('apellidoClientePerfil', apellido);
-            formData.append('correoClientePerfil', correo);
-            formData.append('generoClientePerfil', genero);
-            formData.append('duiClientePerfil', dui)
-            formData.append('telefonoClientePerfil', telefono);
+            formData.append('nombreCliente', modalNombre);
+            formData.append('apellidoCliente', modalApellido);
+            formData.append('correoCliente', correo); // Asegúrate de enviar el correo
+            formData.append('telefonoCliente', modalTelefono);
+            formData.append('direccionCliente', modalDireccion);
+            formData.append('duiCliente', dui); // Asegúrate de enviar el DUI
+
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=editProfile`, {
                 method: 'POST',
                 body: formData
             });
 
             const data = await response.json();
-            console.log(data, "Data desde Editar Perfil OK")
+            console.log(data, "Data desde Editar Perfil OK");
             if (data.status) {
-                console.log(data, 'Valor de editar perfil OK')
+                console.log(data, 'Perfil editado correctamente');
                 Alert.alert('Perfil editado correctamente', '', [
-                    { text: 'OK', onPress: () => fillData() },
-                ], { icon: 'success' });
-            } 
-            
-            else {
-                Alert.alert('Error', data.error);
+                    {
+                        text: 'OK', onPress: () => {
+                            fillData();
+                            setIsModalVisible(false); // Cierra el modal
+                        }
+                    },
+                ]);
+            } else {
+                Alert.alert('Error', data.error || 'Error desconocido');
             }
-        } 
-        
-        catch (error) {
-            Alert.alert('Ocurrió un error al intentar crear el usuario');
+        } catch (error) {
+            Alert.alert('Ocurrió un error al intentar editar el perfil');
         }
     };
 
-    const volverInicio = () => {
-        navigation.navigate('TabNavigator');
+    const openModal = () => {
+        setModalNombre(nombre);
+        setModalApellido(apellido);
+        setModalTelefono(telefono);
+        setModalDireccion(direccion);
+        setIsModalVisible(true);
     };
 
     return (
@@ -150,6 +144,7 @@ export default function UpdateUser({ navigation }) {
                         placeHolder="Nombre(s):"
                         setValor={nombre}
                         setTextChange={setNombre}
+                        setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <View style={styles.inputContainer}>
@@ -158,49 +153,119 @@ export default function UpdateUser({ navigation }) {
                         placeHolder="Apellido(s):"
                         setValor={apellido}
                         setTextChange={setApellido}
+                        setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.title}>Correo electronico:</Text>
-                    <InputEmail
-                        placeHolder='Correo electronico:'
+                    <Text style={styles.title}>DUI:</Text>
+                    <Input
+                        placeHolder="DUI:"
+                        setValor={dui}
+                        setTextChange={setDui}
+                        setEditable={false} // No editable en vista principal
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.title}>Correo:</Text>
+                    <Input
+                        placeHolder="Correo electrónico:"
                         setValor={correo}
                         setTextChange={setCorreo}
-                        setEditable={false}
+                        setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.title}>Telefono:</Text>
+                    <Text style={styles.title}>Teléfono:</Text>
                     <MaskedInputTelefono
                         placeHolder='Teléfono:'
                         telefono={telefono}
                         setTelefono={setTelefono}
-                        setEditable={false}
+                        setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.title}>Dui:</Text>
-                    <MaskedInputDui
-                        placeHolder='Documento de identidad:'
-                        dui={dui}
-                        setDui={setDui}
-                        setEditable={false}
+                    <Text style={styles.title}>Dirección:</Text>
+                    <InputDireccion
+                        placeHolder='Dirección:'
+                        direccion={direccion}
+                        setDireccion={setDireccion}
+                        setEditable={false} // No editable en vista principal
                     />
                 </View>
                 <Boton4
                     textoBoton='Editar Usuario'
-                    accionBoton={editProfile}
+                    accionBoton={openModal} // Abre el modal
                 />
-                <Boton2
-                    textoBoton='Volver al Inicio'
-                    accionBoton={volverInicio}
+                <Boton3
+                    textoBoton='Cerrar Sesión'
+                    accionBoton={handleLogout}
                 />
-                
-            <Boton3
-                textoBoton='Cerrar Sesión'
-                accionBoton={handleLogout}
-            />
             </ScrollView>
+
+            {/* Modal para confirmar la edición */}
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    setIsModalVisible(false);
+                }}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Confirmar Edición</Text>
+                        <Text style={styles.modalMessage}>
+                            ¿Estás seguro de que deseas actualizar los datos del perfil?
+                        </Text>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.title}>Nombre(s):</Text>
+                            <Input
+                                placeHolder="Nombre(s):"
+                                setValor={modalNombre}
+                                setTextChange={setModalNombre}
+                                setEditable={true} // Editable en el modal
+                            />
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.title}>Apellido(s):</Text>
+                            <Input
+                                placeHolder="Apellido(s):"
+                                setValor={modalApellido}
+                                setTextChange={setModalApellido}
+                                setEditable={true} // Editable en el modal
+                            />
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.title}>Teléfono:</Text>
+                            <MaskedInputTelefono
+                                placeHolder='Teléfono:'
+                                telefono={modalTelefono}
+                                setTelefono={setModalTelefono}
+                                setEditable={true} // Editable en el modal
+                            />
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.title}>Dirección:</Text>
+                            <InputDireccion
+                                placeHolder='Dirección:'
+                                direccion={modalDireccion}
+                                setDireccion={setModalDireccion}
+                                setEditable={true} // Editable en el modal
+                            />
+                        </View>
+                        <View style={styles.modalButtons}>
+                            <Button
+                                title="Cancelar"
+                                onPress={() => setIsModalVisible(false)}
+                            />
+                            <Button
+                                title="Confirmar"
+                                onPress={editProfile}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -226,5 +291,36 @@ const styles = StyleSheet.create({
         color: '#838484',
         fontWeight: '500',
         fontSize: 16
+    },
+    inputContainer: {
+        width: '80%',
+        marginBottom: 20,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)', // Fondo semi-transparente
+    },
+    modalContent: {
+        width: '80%',
+        padding: 20,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    modalMessage: {
+        fontSize: 16,
+        marginBottom: 20,
+    },
+    modalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
     },
 });

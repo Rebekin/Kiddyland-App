@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome5} from '@expo/vector-icons'; // Importa MaterialCommunityIcons y MaterialIcons
 import { Platform } from 'react-native';
 
