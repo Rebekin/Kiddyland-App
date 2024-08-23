@@ -9,25 +9,7 @@ export default function Home({ navigation }) {
     const [nombre, setNombre] = useState(null);
     const [apellido, setApellido] = useState(null);
     const ip = Constantes.IP;
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=logOut`, {
-                method: 'GET'
-            });
-
-            const data = await response.json();
-            console.log(data);
-            if (data.status) {
-                navigation.navigate('Sesion');
-            } else {
-                Alert.alert('Error', data.error);
-            }
-        } catch (error) {
-            Alert.alert('Error', 'Ocurrió un error al cerrar la sesión');
-        }
-    };
-
+    
     const irActualizar = () => {
         navigation.navigate('Productos');
     };
@@ -79,10 +61,6 @@ export default function Home({ navigation }) {
             <Boton2
                 textoBoton='Ver Productos'
                 accionBoton={irActualizar}
-            />
-            <Boton3
-                textoBoton='Cerrar Sesión'
-                accionBoton={handleLogout}
             />
         </View>
     );
