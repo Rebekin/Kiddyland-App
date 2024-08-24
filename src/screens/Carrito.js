@@ -1,14 +1,10 @@
 // Importaciones necesarias
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, FlatList, Alert } from 'react-native';
-
 import { useFocusEffect } from '@react-navigation/native';
-// Importa la función useFocusEffect de @react-navigation/native, 
-// que permite ejecutar un efecto cada vez que la pantalla se enfoca.
-
 import Constants from 'expo-constants';
 import * as Constantes from '../utils/constantes';
-import Boton4 from '../components/Buttons/Button4';
+import ButtonCafe from '../components/Buttons/ButtonCafe'; // Asumiendo que Boton4 es ButtonCuarto
 import CarritoCard from '../components/CarritoCard/CarritoCard';
 import ModalEditarCantidad from '../components/Modales/ModalEditarCantidad';
 
@@ -31,7 +27,6 @@ const Carrito = ({ navigation }) => {
 
     // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
     useFocusEffect(
-        // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
         React.useCallback(() => {
             getDetalleCarrito(); // Llama a la función getDetalleCarrito.
         }, [])
@@ -45,21 +40,17 @@ const Carrito = ({ navigation }) => {
             });
 
             const data = await response.json();
-            console.log(data, "Data desde getDetalleCarrito")
+            console.log(data, "Data desde getDetalleCarrito");
 
             if (data.status) {
                 setDataDetalleCarrito(data.dataset);
-            } 
-            
-            else {
-                console.log("No hay detalles del carrito disponibles")
-                //Alert.alert('ADVERTENCIA', data.error);
+            } else {
+                console.log("No hay detalles del carrito disponibles");
+                // Alert.alert('ADVERTENCIA', data.error);
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             console.error(error, "Error desde Catch");
-            Alert.alert('Error', 'Ocurrió un error al listar las categorias');
+            Alert.alert('Error', 'Ocurrió un error al listar las categorías');
         }
     };
 
@@ -72,17 +63,13 @@ const Carrito = ({ navigation }) => {
 
             const data = await response.json();
             if (data.status) {
-                Alert.alert("Se finalizó la compra correctamente")
+                Alert.alert("Se finalizó la compra correctamente");
                 setDataDetalleCarrito([]); // Limpia la lista de detalles del carrito
                 navigation.navigate('TabNavigator', { screen: 'Productos' });
-            } 
-            
-            else {
+            } else {
                 Alert.alert('Error', data.error);
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             Alert.alert('Error', 'Ocurrió un error al finalizar pedido');
         }
     };
@@ -141,7 +128,7 @@ const Carrito = ({ navigation }) => {
             {/* Botones de finalizar pedido y regresar a productos */}
             <View style={styles.containerButtons}>
                 {dataDetalleCarrito.length > 0 && (
-                    <Boton4
+                    <ButtonCafe
                         textoBoton='Finalizar Pedido ✓'
                         accionBoton={finalizarPedido}
                     />
@@ -162,7 +149,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     title: {
-        marginTop:50,
+        marginTop: 50,
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',

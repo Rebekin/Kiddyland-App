@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 
-const Boton2 = ({ textoBoton, accionBoton }) => {
+const ButtonSecundario = ({ textoBoton, accionBoton }) => {
     return (
         <TouchableOpacity onPress={accionBoton} style={styles.button}>
             <Text style={styles.buttonText}>{textoBoton}</Text>
@@ -10,7 +10,7 @@ const Boton2 = ({ textoBoton, accionBoton }) => {
     );
 }
 
-export default Boton2;
+export default ButtonSecundario;
 
 const styles = StyleSheet.create({
     button: {

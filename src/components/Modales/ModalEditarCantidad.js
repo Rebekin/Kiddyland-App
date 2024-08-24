@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, StyleSheet, TextInput, Alert } from 'react-native';
-import Boton3 from '../../components/Buttons/Button3';
-import Boton5 from '../../components/Buttons/Button5';
+import Boton3 from '../../components/Buttons/ButtonCafe';
+import Boton5 from '../../components/Buttons/ButtonPrimero';
 import * as Constantes from '../../utils/constantes';
 
 const ModalEditarCantidad = ({ setModalVisible, modalVisible, idDetalle, setCantidadProductoCarrito, cantidadProductoCarrito, getDetalleCarrito }) => {

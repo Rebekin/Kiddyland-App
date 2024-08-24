@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Alert, Image } from 'react-native';
-import Boton2 from '../components/Buttons/Button2';
-import Boton3 from '../components/Buttons/Button3';
+import ButtonPrimero from '../components/Buttons/ButtonPrimero'; // Suponiendo que es el Boton2
 import * as Constantes from '../utils/constantes';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -23,7 +22,6 @@ export default function Home({ navigation }) {
             if (data.status) {
                 console.log(data.name);
                 if (data.name) {
-                    console.log(data.name);
                     setNombre(data.name.nombre_cliente);
                     setApellido(data.name.apellido_cliente);
                 } else {
@@ -33,32 +31,32 @@ export default function Home({ navigation }) {
                 Alert.alert('Error', data.error);
             }
         } catch (error) {
+            console.error(error);
             Alert.alert('Error', 'Ocurrió un error al cargar la sesión');
         }
     };
 
     useFocusEffect(
-        React.useCallback(() => {
+        useCallback(() => {
             getUser();
         }, [])
     );
 
     return (
         <View style={styles.container}>
-
             <Text style={styles.title}>Bienvenido a Kiddyland</Text>
             <Text style={styles.subtitle}>
-                {nombre ?  nombre : 'No hay Nombre para mostrar'}
+                {nombre ? nombre : 'No hay Nombre para mostrar'}
             </Text>
             <Text style={styles.subtitle}>
-                {apellido ? apellido  : 'No hay Apellido para mostrar'}
+                {apellido ? apellido : 'No hay Apellido para mostrar'}
             </Text>
             <Image
                 source={require('../../assets/logo.png')}
                 style={styles.image}
             />
             <Text style={styles.subtitle2}>Somos la mejor opción para la diversión de tus hijos</Text>
-            <Boton2
+            <ButtonPrimero
                 textoBoton='Ver Productos'
                 accionBoton={irActualizar}
             />
@@ -72,19 +70,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#8FC2BB',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 20, // Agrega espacio lateral
+        paddingHorizontal: 20,
     },
     image: {
         width: 300,
         height: 300,
-        marginBottom: 10, // Aumenta el espacio debajo de la imagen
+        marginBottom: 10,
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
         color: 'white',
-        marginBottom: 5, // Espacio adicional debajo del título
+        marginBottom: 5,
     },
     subtitle: {
         fontSize: 20,
@@ -95,13 +93,14 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '80%',
-        marginVertical: 10, // Espacio entre botones
+        marginVertical: 10,
     },
     buttonText: {
         textAlign: 'center',
         color: 'white',
-        fontSize: 18, // Texto más grande en el botón
-    }, subtitle2: {
+        fontSize: 18,
+    },
+    subtitle2: {
         fontSize: 15,
         fontWeight: '600',
         textAlign: 'center',

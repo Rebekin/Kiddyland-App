@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View, Alert, ScrollView, Modal, Button } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, Modal } from 'react-native';
 import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import * as Constantes from '../utils/constantes';
 // Import de componentes
 import Input from '../components/Inputs/Input';
-import Boton2 from '../components/Buttons/ButtonSecundario';
-import Boton3 from '../components/Buttons/ButtonBlanco';
-import Boton4 from '../components/Buttons/ButtonCafe';
 import MaskedInputTelefono from '../components/Inputs/MaskedInputTelefono';
-import InputDireccion from '../components/Inputs/InputDireccion'; // Asegúrate de crear este componente
+import InputDireccion from '../components/Inputs/InputDireccion';
+import ButtonBlanco from '../components/Buttons/ButtonBlanco';
+import ButtonCafe from '../components/Buttons/ButtonCafe';
+import ButtonPrimero from '../components/Buttons/ButtonPrimero';
+import ButtonSecundario from '../components/Buttons/ButtonSecundario';
+import ButtonTurquesaClaro from '../components/Buttons/ButtonTurquesaClaro';
 
 export default function UpdateUser({ navigation }) {
     const ip = Constantes.IP;
@@ -30,7 +32,7 @@ export default function UpdateUser({ navigation }) {
     // Expresiones regulares para validar teléfono
     const telefonoRegex = /^\d{4}-\d{4}$/;
 
-    // Funcion para llenar los inputs con los datos del usuario
+    // Función para llenar los inputs con los datos del usuario
     const fillData = async () => {
         try {
             const response = await fetch(`${ip}/Kiddyland/api/services/public/cliente.php?action=getUser`, {
@@ -55,7 +57,7 @@ export default function UpdateUser({ navigation }) {
         }
     };
 
-    // Logica para cargar los datos del usuario al cargar la pantalla
+    // Lógica para cargar los datos del usuario al cargar la pantalla
     useFocusEffect(
         useCallback(() => {
             fillData();
@@ -192,11 +194,11 @@ export default function UpdateUser({ navigation }) {
                         setEditable={false} // No editable en vista principal
                     />
                 </View>
-                <Boton4
+                <ButtonSecundario
                     textoBoton='Editar Usuario'
                     accionBoton={openModal} // Abre el modal
                 />
-                <Boton3
+                <ButtonBlanco
                     textoBoton='Cerrar Sesión'
                     accionBoton={handleLogout}
                 />
@@ -253,16 +255,14 @@ export default function UpdateUser({ navigation }) {
                                 setEditable={true} // Editable en el modal
                             />
                         </View>
-                        <View style={styles.modalButtons}>
-                            <Button
-                                title="Cancelar"
-                                onPress={() => setIsModalVisible(false)}
-                            />
-                            <Button
-                                title="Confirmar"
-                                onPress={editProfile}
-                            />
-                        </View>
+                        <ButtonPrimero
+                            textoBoton='Confirmar'
+                            accionBoton={editProfile}
+                        />
+                        <ButtonCafe
+                            textoBoton='Cancelar'
+                            accionBoton={() => setIsModalVisible(false)}
+                        />
                     </View>
                 </View>
             </Modal>
@@ -273,54 +273,47 @@ export default function UpdateUser({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#8FC2BB',
-    },
-    scrollViewStyle: {
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: '#fff',
+        padding: 20,
     },
     texto: {
-        marginTop: 120,
-        marginBottom: 15,
-        color: '#FFF',
-        fontWeight: 'white',
-        fontSize: 22
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginVertical: 20,
+        textAlign: 'center',
     },
-    title: {
-        marginTop: 10,
-        color: 'white',
-        fontWeight: '500',
-        fontSize: 16
+    scrollViewStyle: {
+        paddingBottom: 40,
     },
     inputContainer: {
-        width: '80%',
-        marginBottom: 20,
+        marginBottom: 15,
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)', // Fondo semi-transparente
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
-        width: '80%',
-        padding: 20,
+        width: '90%',
         backgroundColor: 'white',
+        padding: 20,
         borderRadius: 10,
         alignItems: 'center',
     },
     modalTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
     },
     modalMessage: {
         fontSize: 16,
+        textAlign: 'center',
         marginBottom: 20,
-    },
-    modalButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '100%',
     },
 });

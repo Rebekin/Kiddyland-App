@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, Alert, Text } from 'react-native';
-import InputEmail from '../components/Inputs/InputEmail'
-import InputPass from '../components/Inputs/MaskedInputPassword'
-import Boton from '../components/Buttons/Button';
-import Boton2 from '../components/Buttons/Button2';
-import Boton3 from '../components/Buttons/Button3';
-import * as Constantes from '../utils/constantes'
+import InputEmail from '../components/Inputs/InputEmail';
+import InputPass from '../components/Inputs/MaskedInputPassword';
+import ButtonPrimero from '../components/Buttons/ButtonPrimero'; // Suponiendo que es el Boton2
+import ButtonSecundario from '../components/Buttons/ButtonSecundario'; // Suponiendo que es el Boton3
+import ButtonBlanco from '../components/Buttons/ButtonBlanco'; // Suponiendo que es el Boton
+import * as Constantes from '../utils/constantes';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function Sesion({ navigation }) {
-
-    // Estado de la app
     const [correo, setCorreo] = useState('');
     const [clave, setClave] = useState('');
-
     const ip = Constantes.IP;
 
-    // Efecto para cargar los detalles del carrito al cargar la pantalla o al enfocarse en ella
     useFocusEffect(
-        // La función useFocusEffect ejecuta un efecto cada vez que la pantalla se enfoca.
         React.useCallback(() => {
-            validarSesion(); // Llama a la función getDetalleCarrito.
+            validarSesion();
         }, [])
     );
 
@@ -34,16 +29,12 @@ export default function Sesion({ navigation }) {
 
             if (data.status === 1) {
                 navigation.navigate('TabNavigator');
-                console.log("Se ingresa con la sesión activa")
-            } 
-            
-            else {
-                console.log("No hay sesión activa")
-                return
+                console.log("Se ingresa con la sesión activa");
+            } else {
+                console.log("No hay sesión activa");
+                return;
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             console.error(error);
             Alert.alert('Error', 'Ocurrió un error al validar la sesión');
         }
@@ -68,18 +59,14 @@ export default function Sesion({ navigation }) {
             const data = await response.json();
 
             if (data.status) {
-                setClave('')
-                setCorreo('')
+                setClave('');
+                setCorreo('');
                 navigation.navigate('TabNavigator');
-            } 
-            
-            else {
+            } else {
                 console.log(data);
                 Alert.alert('Error sesión', data.error);
             }
-        } 
-        
-        catch (error) {
+        } catch (error) {
             console.error(error, "Error desde Catch");
             Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
         }
@@ -94,28 +81,22 @@ export default function Sesion({ navigation }) {
             const data = await response.json();
 
             if (data.status) {
-                console.log("Sesión Finalizada")
-            } 
-            
-            else {
-                console.log('No se pudo eliminar la sesión')
+                console.log("Sesión Finalizada");
+            } else {
+                console.log('No se pudo eliminar la sesión');
             }
-        }
-        
-        catch (error) {
+        } catch (error) {
             console.error(error, "Error desde Catch");
             Alert.alert('Error', 'Ocurrió un error al iniciar sesión');
         }
     };
 
     const handleNavigateToRegister = async () => {
-        // Función para navegar a la pantalla de registro
         navigation.navigate('SignUp');
     };
 
     return (
         <View style={styles.container}>
-
             <Text style={styles.text}>BIENVENIDO A KIDDYLAND</Text>
             <Text style={styles.text2}>Toy feliz en mi mundo</Text>
             <Image
@@ -133,17 +114,17 @@ export default function Sesion({ navigation }) {
                 setValor={clave}
                 setTextChange={setClave}
             />
-            <Boton2
+            <ButtonPrimero
                 mode="contained"
                 textoBoton='Iniciar sesión'
                 accionBoton={handlerLogin}
             />
-            <Boton3
+            <ButtonSecundario
                 mode="contained"
                 textoBoton='Cerrar sesión'
                 accionBoton={cerrarSesion}
             />
-            <Boton
+            <ButtonBlanco
                 textoBoton="¿No tienes una cuenta? crea una aquí"
                 accionBoton={handleNavigateToRegister}
             />
@@ -165,15 +146,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 10,
     },
-    text:{
+    text: {
         color: 'white',
         marginTop: 80,
-        fontWeight:'800',
+        fontWeight: '800',
         fontSize: 20,
     },
-    text2:{
+    text2: {
         color: 'white',
-        fontWeight:'500',
+        fontWeight: '500',
         fontSize: 15,
     }
 });
